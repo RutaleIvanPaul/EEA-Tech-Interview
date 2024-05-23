@@ -41,15 +41,35 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     testImplementation 'junit:junit:4.13.2'
 
-    implementation "io.insert-koin:koin-android:3.2.0"
+
     implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     implementation "com.squareup.okhttp3:okhttp:4.10.0"
     implementation "androidx.multidex:multidex:2.0.1"
     implementation "com.squareup.moshi:moshi:${moshiVersion}"
     implementation "com.squareup.retrofit2:converter-moshi:${retrofitVersion}"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:${moshiVersion}"
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
 
     def lifecycle_version = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:${lifecycle_version}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_version}"
+
+
+    //OkHttp Logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+
+    //Koin
+    implementation "io.insert-koin:koin-android:3.2.0"
+
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+
+    // ViewBinding
+    implementation "androidx.databinding:viewbinding:7.0.4"
+
+
 }

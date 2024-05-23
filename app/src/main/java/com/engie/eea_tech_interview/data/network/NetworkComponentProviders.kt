@@ -1,10 +1,10 @@
-package com.engie.eea_tech_interview.network
+package com.engie.eea_tech_interview.data.network
 
 import android.content.Context
 import com.squareup.moshi.Moshi
 import okhttp3.Cache
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -29,11 +29,16 @@ fun createRetrofit(
 
 fun createOkHttpClient(context: Context): OkHttpClient {
 
+    val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
     val clientBuilder = OkHttpClient.Builder()
         .connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
         .writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
         .readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
         .cache(Cache(context.cacheDir, CACHE_SIZE))
+        .addInterceptor(loggingInterceptor)
 
     return clientBuilder.build()
 }

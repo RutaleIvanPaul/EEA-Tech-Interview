@@ -1,4 +1,4 @@
-package com.engie.eea_tech_interview.model
+package com.engie.eea_tech_interview.domain.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
