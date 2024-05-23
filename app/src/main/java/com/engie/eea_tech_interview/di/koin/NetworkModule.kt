@@ -1,5 +1,6 @@
 package com.engie.eea_tech_interview.di.koin
 
+import com.engie.eea_tech_interview.Constants
 import com.engie.eea_tech_interview.data.network.MovieApiService
 import com.engie.eea_tech_interview.data.network.createOkHttpClient
 import com.engie.eea_tech_interview.data.network.createMoshiConverter
@@ -10,7 +11,7 @@ import retrofit2.Retrofit
 
 val networkModule = module(createdAtStart = true) {
     single {
-        val baseUrl = "https://api.themoviedb.org/3/"
+        val baseUrl = Constants.BASE_URL + "/"
         createRetrofit(baseUrl, get(), get())
     }
 
