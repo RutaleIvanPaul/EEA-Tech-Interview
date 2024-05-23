@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 
 val networkModule = module(createdAtStart = true) {
     single {
-        val baseUrl = Constants.BASE_URL + "/"
+        val baseUrl = Constants.BASE_URL
         createRetrofit(baseUrl, get(), get())
     }
 

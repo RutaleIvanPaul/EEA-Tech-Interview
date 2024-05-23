@@ -17,4 +17,9 @@ interface MovieApiService {
     suspend fun getGenre(
         @Query("api_key") apiKey: String
     ): GenreResult
+
+    @GET("movie/now_playing")
+    suspend fun getNowPlayingMovies(
+        @Query("api_key") apiKey: String
+    ): SearchResult
 }

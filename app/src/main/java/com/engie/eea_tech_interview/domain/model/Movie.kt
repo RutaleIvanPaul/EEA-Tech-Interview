@@ -1,9 +1,13 @@
 package com.engie.eea_tech_interview.domain.model
 
+
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
+@Parcelize
 data class Movie(
     @Json(name = "id") val id: Int,
     @Json(name = "poster_path") val posterPath: String?,
@@ -16,4 +20,4 @@ data class Movie(
     @Json(name = "title") val title: String?,
     @Json(name = "vote_count") val voteCount: Int?,
     @Json(name = "video") val hasVideo: Boolean?,
-)
+):Parcelable

@@ -9,16 +9,43 @@ import com.engie.eea_tech_interview.domain.usecases.GetMoviesUseCase
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val getMoviesUseCase: GetMoviesUseCase) : ViewModel() {
-    private val _movies = MutableLiveData<SearchResult>()
-    val movies: LiveData<SearchResult> = _movies
+    private val _searchedMovies = MutableLiveData<SearchResult>()
+    val searchedMovies: LiveData<SearchResult> = _searchedMovies
 
-    fun fetchMovies(apiKey: String, query: String) {
+    private val _nowPlayingMovies = MutableLiveData<SearchResult>()
+    val nowPlayingMovies: LiveData<SearchResult> = _nowPlayingMovies
+
+    private val _headerText = MutableLiveData<String>()
+    val headerText:LiveData<String> = _headerText
+
+    fun searchMovies(query: String) {
+        _headerText.value = "Results matching query '${query}' ... "
         viewModelScope.launch {
             try {
-                val result = getMoviesUseCase(apiKey, query)
-                _movies.value = result
+                val result = getMoviesUseCase.searchMovies(query)
+                _searchedMovies.value = result
+                if (result.results.isNullOrEmpty()){
+                    _headerText.value = "No Results matching query '${query}' ... "
+                }
             } catch (e: Exception) {
-                // Handle error
+                // To handle any errors
+            }
+        }
+    }
+
+    fun getNowPlayingMovies() {
+        _headerText.value = "Now Playing"
+        if (_nowPlayingMovies.value != null) {
+            _nowPlayingMovies.value = _nowPlayingMovies.value
+            return
+        }
+
+        viewModelScope.launch {
+            try {
+                val result = getMoviesUseCase.getNowPlayingMovies()
+                _nowPlayingMovies.value = result
+            } catch (e: Exception) {
+                // To handle any errors
             }
         }
     }
