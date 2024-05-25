@@ -1,6 +1,6 @@
 package com.engie.eea_tech_interview.di.koin
 
-import com.engie.eea_tech_interview.Constants
+import com.engie.eea_tech_interview.domainCore.Constants
 import com.engie.eea_tech_interview.data.network.MovieApiService
 import com.engie.eea_tech_interview.data.network.createOkHttpClient
 import com.engie.eea_tech_interview.data.network.createMoshiConverter

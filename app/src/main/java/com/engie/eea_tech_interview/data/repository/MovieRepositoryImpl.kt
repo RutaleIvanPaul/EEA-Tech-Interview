@@ -1,6 +1,6 @@
 package com.engie.eea_tech_interview.data.repository
 
-import com.engie.eea_tech_interview.Constants
+import com.engie.eea_tech_interview.domainCore.Constants
 import com.engie.eea_tech_interview.data.network.MovieApiService
 import com.engie.eea_tech_interview.domain.model.GenreResult
 import com.engie.eea_tech_interview.domain.model.SearchResult
@@ -11,8 +11,8 @@ class MovieRepositoryImpl(private val apiService: MovieApiService) : MovieReposi
         return apiService.getMovies(Constants.MOVIE_API_KEY, query)
     }
 
-    override suspend fun getGenre(apiKey: String): GenreResult {
-        return apiService.getGenre(apiKey)
+    override suspend fun getGenres(): GenreResult {
+        return apiService.getGenres(Constants.MOVIE_API_KEY)
     }
 
     override suspend fun getNowPlayingMovies(): SearchResult {

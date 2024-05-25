@@ -1,4 +1,4 @@
-package com.engie.eea_tech_interview
+package com.engie.eea_tech_interview.domainCore
 
 object Constants {
     const val BASE_URL = "https://api.themoviedb.org/3/"

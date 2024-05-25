@@ -72,20 +72,30 @@ class HomeFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.progressBar.visibility = View.VISIBLE
+                binding.clearSearch.visibility = View.GONE
             }
         })
+
+        binding.clearSearch.setOnClickListener {
+            viewModel.getNowPlayingMovies()
+            binding.searchEditText.text.clear()
+            binding.clearSearch.visibility = View.GONE
+        }
     }
 
     private fun initObservers() {
-        viewModel.searchedMovies.observe(viewLifecycleOwner, Observer { movies ->
+        viewModel.searchedMovies.observe(viewLifecycleOwner) { movies ->
             moviesAdapter.updateMovies(movies.results)
             binding.progressBar.visibility = View.GONE
-        })
+            if(binding.searchEditText.text.isNotEmpty()){
+                binding.clearSearch.visibility = View.VISIBLE
+            }
+        }
 
-        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer { movies ->
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner) { movies ->
             moviesAdapter.updateMovies(movies.results)
             binding.progressBar.visibility = View.GONE
-        })
+        }
 
         viewModel.headerText.observe(viewLifecycleOwner) {
             binding.header.text = it
@@ -106,8 +116,14 @@ class HomeFragment : Fragment() {
     private fun showDetailsFragment(movie: Movie) {
         val fragment = DetailsFragment.newInstance(movie)
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .setCustomAnimations(
+                R.anim.slide_in_right, // Enter animation
+                R.anim.slide_out_left, // Exit animation
+                R.anim.slide_in_left, // Pop enter animation
+                R.anim.slide_out_right// Pop exit animation
+            )
             .addToBackStack(null)
+            .replace(R.id.fragment_container, fragment)
             .commit()
     }
 

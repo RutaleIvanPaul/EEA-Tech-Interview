@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
-import com.engie.eea_tech_interview.Constants
+import com.engie.eea_tech_interview.domainCore.Constants
 import com.engie.eea_tech_interview.R
+import com.engie.eea_tech_interview.app.viewmodel.MainViewModel
 import com.engie.eea_tech_interview.databinding.FragmentDetailsBinding
 import com.engie.eea_tech_interview.domain.model.Movie
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
+    private val viewModel: MainViewModel by viewModel()
+    private lateinit var movie:Movie
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,9 +29,19 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        movie = arguments?.getParcelable<Movie>(ARG_MOVIE) ?: return
+        initUI()
+        initObservers()
+        movie.genreIds?.let { viewModel.fetchAssociatedGenres(it) }
+    }
 
-        val movie = arguments?.getParcelable<Movie>(ARG_MOVIE) ?: return
+    private fun initObservers() {
+        viewModel.genres.observe(viewLifecycleOwner){
+            binding.movieGenre.text = it
+        }
+    }
 
+    private fun initUI() {
         binding.movieTitle.text = movie.title
         binding.movieOverview.text = movie.overview
         binding.movieReleaseDate.text = movie.releaseDate

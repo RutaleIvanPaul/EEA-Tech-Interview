@@ -2,7 +2,6 @@ package com.engie.eea_tech_interview.data.network
 
 import com.engie.eea_tech_interview.domain.model.GenreResult
 import com.engie.eea_tech_interview.domain.model.SearchResult
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,7 +13,7 @@ interface MovieApiService {
     ): SearchResult
 
     @GET("genre/movie/list")
-    suspend fun getGenre(
+    suspend fun getGenres(
         @Query("api_key") apiKey: String
     ): GenreResult
 

@@ -23,8 +23,19 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:visibility="gone"
+            android:layout_alignBottom="@id/searchEditText"
+            android:layout_alignEnd="@id/searchEditText"/>
+
+        <ImageView
+            android:id="@+id/clearSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="10dp"
             android:visibility="gone"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
             android:layout_alignBottom="@id/searchEditText"
             android:layout_alignEnd="@id/searchEditText"/>
     </RelativeLayout>

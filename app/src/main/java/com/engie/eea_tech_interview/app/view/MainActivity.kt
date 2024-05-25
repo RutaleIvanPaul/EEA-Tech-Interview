@@ -23,9 +23,16 @@ class MainActivity : AppCompatActivity() {
 
 
         if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                replace(R.id.fragment_container, HomeFragment())
-            }
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                        R.anim.slide_in_right, // Enter animation
+                        R.anim.slide_out_left, // Exit animation
+                        R.anim.slide_in_left, // Pop enter animation
+                        R.anim.slide_out_right// Pop exit animation
+                    )
+                .replace(R.id.fragment_container, HomeFragment())
+                .commit()
+
         }
 
 

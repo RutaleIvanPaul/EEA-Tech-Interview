@@ -1,14 +1,16 @@
 package com.engie.eea_tech_interview.app.view
 
 
-import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CenterInside
-import com.engie.eea_tech_interview.Constants
+import com.bumptech.glide.request.RequestListener
+import com.engie.eea_tech_interview.domainCore.Constants
 import com.engie.eea_tech_interview.R
 import com.engie.eea_tech_interview.databinding.ItemMovieBinding
 import com.engie.eea_tech_interview.domain.model.Movie
@@ -19,6 +21,8 @@ class MoviesAdapter(private val onClick: (Movie) -> Unit) : RecyclerView.Adapter
 
     inner class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
+            binding.movieTitle.text = movie.title
+            binding.movieReleaseDate.text = movie.releaseDate
             Glide.with(binding.moviePoster.context)
                 .load("${Constants.BASE_IMAGE_URL}${Constants.IMAGE_SIZE}${movie.posterPath}")
                 .error(R.drawable.placeholder)

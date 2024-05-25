@@ -5,5 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="now_playing">Now Playing</string>
     <string name="search_movies">Search movies</string>
+    <string name="it_appears_this_movie_s_overview_is_not_available_yet">It Appears this Movie\'s Overview is not available yet.</string>
+    <string name="not_available">Not Available</string>
 </resources>
 
